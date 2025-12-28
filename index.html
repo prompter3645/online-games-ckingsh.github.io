@@ -1,19 +1,23 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>ExampleSite</title>
+  <meta charset="UTF-8">
+  <title>Game Hub Login</title>
   <link rel="stylesheet" href="css/style.css">
+  <script type="module" src="js/firebase.js"></script>
+  <script type="module" src="js/auth.js"></script>
 </head>
 <body>
-  <h1>ExampleSite</h1>
-  <input id="name" placeholder="Username">
-  <button id="go">Enter</button>
+  <h1>Welcome to Game Hub</h1>
+  <input type="text" id="username" placeholder="Enter your username">
+  <button id="loginBtn">Login / Continue</button>
 
   <script type="module">
     import { login } from "./js/auth.js";
-    document.getElementById("go").onclick = () => {
-      const name = document.getElementById("name").value.trim();
-      if (name) login(name);
+    document.getElementById("loginBtn").onclick = () => {
+      const username = document.getElementById("username").value.trim();
+      if (!username) return alert("Enter a username");
+      login(username);
     };
   </script>
 </body>
