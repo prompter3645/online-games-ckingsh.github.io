@@ -1,15 +1,35 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Game Lobby</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script type="module" src="js/firebase.js"></script>
+  <script type="module" src="js/lobby.js"></script>
+</head>
 <body>
-  <h2>Lobby</h2>
-  <button onclick="createRoom()">Create Room</button><br><br>
-  <input id="room" placeholder="Room Code">
-  <button onclick="joinRoom()">Join</button>
+  <h1>Lobby</h1>
+
+  <div>
+    <h3>Create Room</h3>
+    <button id="createRoom">Create Room</button>
+  </div>
+
+  <div>
+    <h3>Join Room</h3>
+    <input id="joinCode" placeholder="Enter room code">
+    <button id="joinRoom">Join Room</button>
+  </div>
 
   <script type="module">
     import { createRoom, joinRoom } from "./js/lobby.js";
-    window.createRoom = createRoom;
-    window.joinRoom = () => joinRoom(document.getElementById("room").value.toUpperCase());
+
+    document.getElementById("createRoom").onclick = createRoom;
+    document.getElementById("joinRoom").onclick = () => {
+      const code = document.getElementById("joinCode").value.trim().toUpperCase();
+      if (!code) return alert("Enter room code");
+      joinRoom(code);
+    };
   </script>
 </body>
 </html>
