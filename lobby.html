@@ -1,1 +1,15 @@
+<!DOCTYPE html>
+<html>
+<body>
+  <h2>Lobby</h2>
+  <button onclick="createRoom()">Create Room</button><br><br>
+  <input id="room" placeholder="Room Code">
+  <button onclick="joinRoom()">Join</button>
 
+  <script type="module">
+    import { createRoom, joinRoom } from "./js/lobby.js";
+    window.createRoom = createRoom;
+    window.joinRoom = () => joinRoom(document.getElementById("room").value.toUpperCase());
+  </script>
+</body>
+</html>
