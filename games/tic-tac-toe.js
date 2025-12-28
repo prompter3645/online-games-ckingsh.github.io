@@ -1,17 +1,23 @@
-window.startGame = (g) => {
-  if (g !== "tic-tac-toe") return;
-  let board = Array(9).fill("");
-  const el = document.getElementById("game");
+import { doc, onSnapshot, updateDoc } from "../js/firebase.js";
+import { nextTurn, isValidMove, getUid } from "../js/utils.js";
 
-  function draw() {
-    el.innerHTML = board.map((c,i)=>`<button onclick="move(${i})">${c}</button>`).join("");
-  }
+window.startGame = (game, roomId) => {
+  if (game !== "tic-tac-toe") return;
+  const ref = doc(firebase.db, "rooms", roomId);
 
-  window.move = i => {
-    if (board[i]) return;
-    board[i] = "X";
-    draw();
-  };
+  onSnapshot(ref, snap => {
+    const state = snap.data().gameState || { board: Array(9).fill(""), currentTurn: snap.data().players[0] };
+    const boardEl = document.getElementById("game");
+    boardEl.innerHTML = state.board.map((v,i)=>`<button style="width:60px;height:60px;" onclick="makeMove(${i})">${v}</button>`).join("");
 
-  draw();
+    window.makeMove = async (i) => {
+      const uid = getUid();
+      if (state.currentTurn !== uid) return alert("Not your turn!");
+      if (!isValidMove(state.board,i)) return;
+
+      state.board[i] = uid === snap.data().players[0] ? "X" : "O";
+      state.currentTurn = nextTurn(snap.data().players, uid);
+      await updateDoc(ref, { gameState: state });
+    };
+  });
 };
