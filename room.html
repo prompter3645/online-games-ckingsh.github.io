@@ -1,21 +1,47 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Game Room</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script type="module" src="js/firebase.js"></script>
+  <script type="module" src="js/room.js"></script>
+  <script type="module" src="js/chat.js"></script>
+  <script type="module" src="js/friends.js"></script>
+</head>
 <body>
-  <h2>Room</h2>
+  <h1>Room: <span id="roomId"></span></h1>
 
   <div id="menu">
+    <h3>Select Games (Host Only)</h3>
     <label><input type="checkbox" value="guess-number"> Guess Number</label>
     <label><input type="checkbox" value="tic-tac-toe"> Tic Tac Toe</label>
     <label><input type="checkbox" value="wordle"> Wordle</label>
-    <label><input type="checkbox" value="guess-word"> Guess the Word</label>
+    <label><input type="checkbox" value="guess-word"> Guess Word</label>
     <label><input type="checkbox" value="chess"> Chess</label>
     <label><input type="checkbox" value="checkers"> Checkers</label>
-    <br><br>
-    <button id="start">Start</button>
+    <button id="start">Start Game</button>
   </div>
 
-  <div id="game"></div>
+  <div id="game">
+    <!-- Game board / inputs appear here -->
+  </div>
 
-  <script type="module" src="js/room.js"></script>
+  <div id="chatContainer">
+    <h3>Room Chat</h3>
+    <div id="chat"></div>
+    <input id="chatInput" placeholder="Type message">
+    <button onclick="sendMessage(document.getElementById('chatInput').value)">Send</button>
+  </div>
+
+  <div id="friendsContainer">
+    <h3>Friends</h3>
+    <input id="friendCode" placeholder="Friend Code">
+    <button onclick="addFriend(document.getElementById('friendCode').value)">Add Friend</button>
+  </div>
+
+  <script>
+    document.getElementById("roomId").innerText = localStorage.getItem("room");
+  </script>
 </body>
 </html>
