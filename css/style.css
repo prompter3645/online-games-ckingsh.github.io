@@ -1,1 +1,8 @@
-
+body {
+  font-family: Arial;
+  text-align: center;
+}
+button {
+  padding: 8px;
+  margin: 4px;
+}
