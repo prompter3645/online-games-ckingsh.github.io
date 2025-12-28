@@ -1,8 +1,12 @@
-body {
-  font-family: Arial;
-  text-align: center;
-}
-button {
-  padding: 8px;
-  margin: 4px;
+body { font-family: Arial; text-align:center; padding:5px; }
+button { padding:12px; font-size:16px; margin:4px; cursor:pointer; }
+input { width:80%; padding:10px; font-size:16px; margin:4px; }
+#game button { width:60px; height:60px; font-size:20px; }
+#chat { max-height:200px; overflow-y:auto; border:1px solid #ccc; padding:5px; margin:5px; text-align:left;}
+#menu label { display:block; margin:4px; }
+
+@media(max-width:600px){
+  #game button { width:40px; height:40px; font-size:16px; }
+  input, button { width:95%; font-size:14px; padding:8px; }
+  #menu label { font-size:14px; }
 }
