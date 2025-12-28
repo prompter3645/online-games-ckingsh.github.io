@@ -1,7 +1,5 @@
 import { db } from "./firebase.js";
-import {
-  doc, setDoc, getDoc, updateDoc
-} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+import { doc, setDoc, getDoc, updateDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
 export async function createRoom() {
   const roomId = Math.random().toString(36).substring(2, 7).toUpperCase();
@@ -11,7 +9,9 @@ export async function createRoom() {
     host: uid,
     players: [uid],
     games: [],
-    currentGame: null
+    currentGame: null,
+    gameState: {},
+    chat: []
   });
 
   localStorage.setItem("room", roomId);
