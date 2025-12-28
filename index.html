@@ -1,1 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>ExampleSite</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <h1>ExampleSite</h1>
+  <input id="name" placeholder="Username">
+  <button id="go">Enter</button>
 
+  <script type="module">
+    import { login } from "./js/auth.js";
+    document.getElementById("go").onclick = () => {
+      const name = document.getElementById("name").value.trim();
+      if (name) login(name);
+    };
+  </script>
+</body>
+</html>
